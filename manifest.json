@@ -1,0 +1,10 @@
+{
+  "name": "Solitär für die Facharbeit",
+  "short_name": "Solitär",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "orientation": "landscape"
+}
