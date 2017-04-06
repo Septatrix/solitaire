@@ -1,8 +1,8 @@
 {
   "name": "Solitär für die Facharbeit",
   "short_name": "Solitär",
-  "lang": "en-US",
-  "start_url": "/other/programming/node/01_doppelkopf/",
+  "lang": "de-DE",
+  "start_url": "/solitaire/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#FFFFFF",
