@@ -5,28 +5,30 @@
   :host {
     display: inline-flex;
     flex-direction: column;
-    /*align-items: center;
+    /* align-items: center;
     align-content: center;
     width: calc(240px *.5);
     height: 100%;
-    margin: auto;*/
-    --offset-bottom: 50px;
+    margin: auto; */
+    --offset-bottom: 13px;
     /*--offset-right: 1px;*/
-    border: 1px solid red;
+    /*border: 1px solid red;*/
   }
   ::slotted(septatrix-card) {
-    margin-bottom: calc(calc(336px *.5) * -1 + var(--offset-bottom, 0px));
+    margin-bottom: calc(calc(336px * var(--scale, 1)) * -1 + var(--offset-bottom, 0px));
     /*margin-right: calc(calc(240px *.5) * -1 + var(--offset-right, 0px));*/
     /*flex-basis: auto;*/
+  }
+  .deckBackground {
+    position: absolute;
   }
   </style>
   <slot></slot>
 </template>
 
-
 <script>
   {
-    'strict-mode:'
+    'use strict';
     const thisDoc = document.currentScript.ownerDocument;
     class Deck extends HTMLElement {
       constructor() {
@@ -50,6 +52,18 @@
           }
         );
         this.observer.observe(this, {childList: true})
+      }
+
+      addBackground(node) {
+        if(this.shadowRoot.querySelectorAll('deckBackground').length > 0) return;
+        node.classList.add('deckBackground');
+        this.shadowRoot.insertBefore(node, this.shadowRoot.firstElementChild);
+      }
+
+      removeBackground() {
+        let node = this.shadowRoot.querySelectorAll('deckBackground')[0];
+        node.classList.remove('deckBackground');
+        return this.shadowRoot.removeChild(node);
       }
 
       configureOptions(options) {Object.assign(this.options, options);}

@@ -3,7 +3,6 @@
     :host {
       /*display: inline-block;*/
       /*position: relative;*/
-      --scale: .5;
       width: calc(240px * var(--scale, 1));
       height: calc(336px * var(--scale, 1));
       cursor: pointer;
@@ -22,7 +21,7 @@
       backface-visibility: hidden;
     }
     #back {
-      background-image: url(img/playingCards/black_joker.svg);
+      background-image: url(img/playingCards/card_back.svg);
       transform: rotateY(180deg);
     }
   </style>
@@ -33,6 +32,7 @@
 
 <script>
   {
+    'use strict';
     const thisDoc = document.currentScript.ownerDocument;
     class Card extends HTMLElement {
       constructor() {
@@ -43,7 +43,7 @@
 
       static get observedAttributes() {return ['suit', 'rank'];}
       attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'suit' || name === 'rank') {
+        if ((name === 'suit' || name === 'rank') && this.suit && this.rank) {
           this.shadowRoot.getElementById('face').style.backgroundImage =
           `url(img/playingCards/${this.suit.toLowerCase()}_${this.rank}.svg)`;
         }
@@ -72,6 +72,11 @@
         } else {
           this.removeAttribute('flipped');
         }
+      }
+
+      setCardBack(url) {
+        this.shadowRoot.getElementById('back').style.backgroundImage =
+        `url(${url})`;
       }
     }
     customElements.define('septatrix-card', Card);
